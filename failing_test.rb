@@ -9,6 +9,14 @@ class FailingTest < TestCase
     assert false == true, 'this was supposed to fail anyway'
   end
 
+  def test_equality
+    assert_equal true, !true
+  end
+
+  def test_equality_with_custom_message
+    assert_equal true, !true, 'custom msg yo'
+  end
+
   def test_raising
     raise 'the roof'
   end

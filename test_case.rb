@@ -4,6 +4,10 @@ class TestCase
   def assert(result, message = nil)
     raise AssertionFailure.new(message || 'Failed assertion, no message given') unless result == true
   end
+
+  def assert_equal(expected, actual, message = nil)
+    assert (expected == actual), message || "Expected #{actual} to be #{expected}."
+  end
 end
 
 at_exit do
