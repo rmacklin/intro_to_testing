@@ -16,6 +16,18 @@ class TestCase
   def refute_predicate(object, predicate, message = nil)
     assert !object.send(predicate), message || "Expected #{object.inspect} to not be #{predicate}."
   end
+
+  def assert_difference(expression, difference = 1, message = nil, &block)
+    before = eval(expression, block.binding)
+    yield
+    after = eval(expression, block.binding)
+
+    assert_equal before + difference, after, message || "Expected #{expression} to change by #{difference}."
+  end
+
+  def assert_no_difference(expression, message = nil, &block)
+    assert_difference(expression, 0, message, &block)
+  end
 end
 
 at_exit do

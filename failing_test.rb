@@ -25,6 +25,20 @@ class FailingTest < TestCase
     refute_predicate nil, :nil?
   end
 
+  def test_difference
+    x = 1
+    assert_difference('x', 2) do
+      x += 1
+    end
+  end
+
+  def test_no_difference
+    x = 1
+    assert_no_difference('x') do
+      x += 1
+    end
+  end
+
   def test_raising
     raise 'the roof'
   end

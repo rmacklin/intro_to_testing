@@ -17,6 +17,21 @@ class PassingTest < TestCase
     refute_predicate true, :nil?
   end
 
+  def test_difference
+    x = 1
+    assert_difference('x', 2) do
+      x += 2
+    end
+  end
+
+  def test_no_difference
+    x = 1
+    assert_no_difference('x') do
+      x += 1
+      x -= 1
+    end
+  end
+
   def not_a_test_method
     raise 'the roof'
   end
