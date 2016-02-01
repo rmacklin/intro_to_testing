@@ -8,6 +8,14 @@ class TestCase
   def assert_equal(expected, actual, message = nil)
     assert (expected == actual), message || "Expected #{actual} to be #{expected}."
   end
+
+  def assert_predicate(object, predicate, message = nil)
+    assert object.send(predicate), message || "Expected #{object.inspect} to be #{predicate}."
+  end
+
+  def refute_predicate(object, predicate, message = nil)
+    assert !object.send(predicate), message || "Expected #{object.inspect} to not be #{predicate}."
+  end
 end
 
 at_exit do

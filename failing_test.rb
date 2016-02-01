@@ -17,6 +17,14 @@ class FailingTest < TestCase
     assert_equal true, !true, 'custom msg yo'
   end
 
+  def test_assert_predicate
+    assert_predicate true, :nil?
+  end
+
+  def test_refute_predicate
+    refute_predicate nil, :nil?
+  end
+
   def test_raising
     raise 'the roof'
   end
