@@ -1,8 +1,8 @@
 class TestCase
   class AssertionFailure < StandardError; end
 
-  def assert(result)
-    raise AssertionFailure unless result == true
+  def assert(result, message = nil)
+    raise AssertionFailure.new(message || 'Failed assertion, no message given') unless result == true
   end
 end
 
@@ -25,7 +25,7 @@ at_exit do
       rescue => e
         fail_count += 1
         failure_line = e.backtrace.find { |file| file !~ Regexp.new(__FILE__) }
-        failures << "#{klass.name}\##{test_method_name}, #{failure_line.scan(/^(.*):/).flatten.first}"
+        failures << "#{e.message}\n  #{klass.name}\##{test_method_name}, #{failure_line.scan(/^(.*):/).flatten.first}"
         print "F"
       end
     end
